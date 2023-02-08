@@ -1,5 +1,5 @@
 def test_users_create_payload(email: Faker::Internet.email,
-                              password: Faker::Internet..password(min_length: 8, max_length: 8, mix_case: true, special_characters: true) + 'Ay&1',
+                              password: Faker::Internet.password(min_length: 8, max_length: 8, mix_case: true, special_characters: true) + 'Ay&1',
                               read_only: false,
                               phone_number: Faker::PhoneNumber.phone_number,
                               legal_name: Faker::Name.first_name + ' ' + Faker::Name.last_name,
