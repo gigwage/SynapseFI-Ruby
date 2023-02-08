@@ -12,7 +12,7 @@ class ClientTest < Minitest::Test
   end
 
   def test_configured_through_options
-    client = SynapsePayRest::Client.new(@options)
+    client = SynapsePayRest::Client.new(**@options)
     # these keys don't exist in config
     @options.delete(:development_mode)
     @options[:oauth_key] = ''
@@ -23,12 +23,12 @@ class ClientTest < Minitest::Test
 
   def test_endpoint_changes_when_development_mode_false
     @options[:development_mode] = false
-    client = SynapsePayRest::Client.new(@options)
+    client = SynapsePayRest::Client.new(**@options)
     assert_equal client.client.base_url, 'https://api.synapsefi.com/v3.1'
   end
 
   def test_instance_reader_methods
-    client = SynapsePayRest::Client.new(@options)
+    client = SynapsePayRest::Client.new(**@options)
     assert_instance_of SynapsePayRest::HTTPClient, client.client
     assert_instance_of SynapsePayRest::Users, client.users
     assert_instance_of SynapsePayRest::Nodes, client.nodes
@@ -41,16 +41,16 @@ class ClientTest < Minitest::Test
 
   # @todo turn on response logging as well as requests
   def test_logging_flags
-    client = SynapsePayRest::Client.new(@options)
+    client = SynapsePayRest::Client.new(**@options)
     assert_silent { client.users.create(payload: test_users_create_payload) }
 
     @options[:logging] = true
-    client = SynapsePayRest::Client.new(@options)
+    client = SynapsePayRest::Client.new(**@options)
     assert_output { client.users.create(payload: test_users_create_payload) }
 
     log_file = fixture_path('test.txt')
     @options[:log_to] = log_file
-    client = SynapsePayRest::Client.new(@options)
+    client = SynapsePayRest::Client.new(**@options)
     assert_output { client.users.create(payload: test_users_create_payload) }
 
     # cleanup
@@ -58,7 +58,7 @@ class ClientTest < Minitest::Test
   end
 
   def test_issue_public_key
-    client = SynapsePayRest::Client.new(@options)
+    client = SynapsePayRest::Client.new(**@options)
     response = client.issue_public_key(scope: 'CLIENT|CONTROLS')
 
     assert_equal ['CLIENT|CONTROLS'], response.scope
@@ -66,7 +66,7 @@ class ClientTest < Minitest::Test
   end
 
   def test_crypto_quote
-    client = SynapsePayRest::Client.new(@options)
+    client = SynapsePayRest::Client.new(**@options)
     response = client.get_crypto_quotes
 
     refute_nil response.btcusd

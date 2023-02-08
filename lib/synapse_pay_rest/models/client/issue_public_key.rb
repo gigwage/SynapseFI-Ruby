@@ -18,7 +18,7 @@ module SynapsePayRest
           public_key:                response['public_key_obj']['public_key'],
           scope:                     response['public_key_obj']['scope']
         }
-        self.new(args)
+        self.new(**args)
       end
 
       #Issues public key for client.
