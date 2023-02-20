@@ -7,7 +7,7 @@ module SynapsePayRest
           type: 'IC-DEPOSIT-US',
           nickname: nickname
         }.merge(options)
-        super(args)
+        super(**args)
       end
     end
   end
