@@ -4,8 +4,8 @@ module SynapsePayRest
       private
       def payload_for_create(nickname:, **options)
         args = {
-          nickname: nickname,
-          type: 'IC-DEPOSIT-US'
+          type: 'IC-DEPOSIT-US',
+          nickname: nickname
         }.merge(options)
         super(**args)
       end
