@@ -27,7 +27,8 @@ module SynapsePayRest
       'CARD-US'                => CardUsNode,
       'SUBCARD-US'             => SubcardUsNode,
       'CRYPTO-US'              => CryptoUsNode,
-      "CUSTODY-US"             => CustodyUsNode
+      "CUSTODY-US"             => CustodyUsNode,
+      'IC-DEPOSIT-US'          => IcDepositUsNode
     }.freeze
 
     class << self

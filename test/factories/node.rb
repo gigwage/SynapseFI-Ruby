@@ -258,6 +258,17 @@ def test_ib_subaccount_us_create_args(user: test_user,
   }
 end
 
+def test_ic_deposit_us_create_args(user: test_user,
+                                type: 'IC-DEPOSIT-US',
+                                nickname: 'Test IC-DEPOSIT-US Account'
+                                )
+{
+user: user,
+type: type,
+nickname: nickname
+}
+end
+
 def test_clearing_us_create_args(user: test_user,
                                 type: 'CLEARING-US',
                                 nickname: 'Test CLEARING-US Account'
