@@ -146,7 +146,7 @@ module SynapsePayRest
           args[:fee_note]   = response['fees'].first['note']
           args[:fee_to_id]  = response['fees'].first['to']['id']
         end
-        self.new(args)
+        self.new(**args)
       end
 
       private
