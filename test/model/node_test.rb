@@ -586,6 +586,27 @@ class NodeTest < Minitest::Test
     other_instance_vars.each { |var| refute_nil node.send(var) }
   end
 
+  def test_create_ic_deposit_us_node
+    args = test_ic_deposit_us_create_args(user: @user)
+    node = SynapsePayRest::IcDepositUsNode.create(args)
+
+    assert_instance_of SynapsePayRest::IcDepositUsNode, node
+    assert_equal @user, node.user
+    assert_includes @user.nodes, node
+
+    other_instance_vars = [:is_active, :permission, :type, :balance, :currency, :monthly_withdrawals_remaining]
+
+    # verify instance vars readable and mapped to values
+    args.each do |var_name, value|
+      if [:account_number, :routing_number].include? var_name
+        refute_nil node.send(var_name)
+      else
+        assert_equal value, node.send(var_name)
+      end
+    end
+    other_instance_vars.each { |var| refute_nil node.send(var) }
+  end
+  
   def test_create_clearing_us_node
     args = test_clearing_us_create_args(user: @user)
     node = SynapsePayRest::ClearingUsNode.create(args)
