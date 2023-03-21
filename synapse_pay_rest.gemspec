@@ -27,7 +27,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'minitest', '~> 5.8.2'
   s.add_development_dependency 'minitest-reporters', '~> 1.1.5'
   s.add_development_dependency 'dotenv', '~> 2.1.1'
-  s.add_development_dependency 'faker', '~> 1.6.6'
+  s.add_development_dependency 'faker', '~> 2.21.0'
   s.add_development_dependency 'simplecov', '~> 0.12.0'
   s.add_development_dependency 'm', '~> 1.5.0'
+  s.add_development_dependency 'psych', '< 4'
 end

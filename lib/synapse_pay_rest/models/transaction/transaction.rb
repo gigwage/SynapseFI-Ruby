@@ -166,15 +166,46 @@ module SynapsePayRest
             'ip' => ip
           }
         }
+
         # optional payload fields
         payload['extra']['asset']      = options[:asset] if options[:asset]
         payload['extra']['same_day']   = options[:same_day] if options[:same_day]
         payload['extra']['supp_id']    = options[:supp_id] if options[:supp_id]
         payload['extra']['note']       = options[:note] if options[:note]
         payload['extra']['process_on'] = options[:process_in] if options[:process_in]
+
+
+        # here is the hacks
+        # for interchange meta object
+        # reference:
+        #   https://docs.synapsefi.com/api-references/transactions/transaction-object-details#interchange-meta-fields
+        #
+        # ----------------------------------------------------------------------
+        #
+        if options[:soft_descriptor]
+          payload['extra']['interchange_meta'] = {
+            'soft_descriptor' => options[:soft_descriptor]                            # science - 1
+          }
+        end
+
+        # ----------------------------------------------------------------------
+
+        # other payload fields
         other = {}
         other['attachments'] = options[:attachments] if options[:attachments]
+
+        # # I don't know where I've to put soft_descriptor
+        # # if put in extra not works, probably we need to put under `other`
+        # #
+        # if options[:soft_descriptor]
+        #   other['soft_descriptor'] = options[:soft_descriptor]                        # science - 2
+        #
+        #   other['interchange_meta'] ||= {}
+        #   other['interchange_meta']['soft_descriptor'] = options[:soft_descriptor]    # science - 3
+        # end
+
         payload['extra']['other'] = other if other.any?
+
         fees = []
         # deprecated fee flow
         fee = {}
@@ -187,6 +218,7 @@ module SynapsePayRest
         # new fee flow
         fees = options[:fees] if options[:fees]
         payload['fees'] = fees if fees.any?
+
         payload
       end
 

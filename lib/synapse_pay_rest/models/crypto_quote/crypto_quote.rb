@@ -19,7 +19,7 @@ module SynapsePayRest
           usdbtc:        response['USDBTC'],
           usdeth:        response['USDETH']
         }
-        self.new(args)
+        self.new(**args)
       end
 
       def get(client:)
