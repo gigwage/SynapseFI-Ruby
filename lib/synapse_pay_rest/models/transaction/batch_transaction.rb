@@ -94,6 +94,7 @@ module SynapsePayRest
         # new fee flow
         fees = options[:fees] if options[:fees]
         payload['fees'] = fees if fees.any?
+        Rails.logger.info "payload_for_transaction: #{payload}"
         payload
       end
 
