@@ -111,6 +111,7 @@ module SynapsePayRest
 
     def create_batch(user_id:, node_id:, payload:, idempotency_key: nil)
       path = create_batch_path(user_id: user_id, node_id: node_id)
+      logger.info "SynapsePayRest: creating batch transaction payload for user_id: #{user_id}, node_id: #{node_id}, with payload: #{payload}"
       client.post(path, payload)
     end
 

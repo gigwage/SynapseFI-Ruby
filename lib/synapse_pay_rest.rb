@@ -101,6 +101,14 @@ module SynapsePayRest
   #
   # @param [Constant]
   # @return [Constant] the corresponding constant that is not deprecated.
+
+  class << self
+    attr_accessor :logger
+  end
+
+  self.logger = Logger.new($stdout)
+  self.logger.level = Logger::INFO
+
   def self.const_missing(const_name)
     super unless const_name == :Trans
     warn caller.first + " DEPRECATION WARNING: the class SynapsePayRest::#{const_name}"\
