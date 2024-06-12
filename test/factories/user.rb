@@ -1,13 +1,13 @@
 def test_user(client: test_client,
               logins: [{
                 email: Faker::Internet.email,
-                password: Faker::Internet.password,
+                password: Faker::Internet.password(min_length: 8, max_length: 8, mix_case: true, special_characters: true) + 'Ay&1',
                 read_only: false
               }],
               phone_numbers: [Faker::PhoneNumber.cell_phone],
               legal_names: [Faker::Name.name],
-              note: Faker::Hipster.sentence(3),
-              supp_id: Faker::Number.number(10).to_s,
+              note: Faker::Hipster.sentence(word_count: 3),
+              supp_id: Faker::Number.number(digits: 10).to_s,
               is_business: false)
   SynapsePayRest::User.create(
     client: client,
