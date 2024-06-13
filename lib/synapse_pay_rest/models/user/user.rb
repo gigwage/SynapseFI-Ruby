@@ -732,6 +732,10 @@ module SynapsePayRest
       IbSubaccountUsNode.create(user: self, **options)
     end
 
+    def create_ic_deposit_us_node(**options)
+      IcDepositUsNode.create(user: self, **options)
+    end
+
     # Creates a INTERCHANGE-US node.
     #
     # @param nickname [String] nickname for the node
